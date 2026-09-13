@@ -1,0 +1,61 @@
+class MinStack {
+public:
+    struct Node {
+    int value;
+    int mini;
+    Node* next;
+    Node(int x) {
+        value = x;
+        mini=INT_MAX;
+        next = NULL;
+    }
+};
+
+Node* head=NULL;
+
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        Node* temp=head;
+        head=new Node(x);
+        if(temp==NULL){
+        head->mini=x;
+        }
+        else{
+        head->mini=min(x,temp->mini);
+        }
+       
+        head->next=temp;
+    }
+    
+    void pop() {
+        if(head==NULL){
+            return;
+        }
+        else if(head->next==NULL){
+            head=NULL;
+            return;
+        }
+        else{
+            Node* temp=head;
+            head=head->next;
+            delete temp;
+        }
+    }
+    
+    int top() {
+        if(head==NULL){
+            return -1;
+        }
+        return head->value;
+        
+    }
+    
+    int getMin(){
+return head->mini;
+        
+    }
+};
+
